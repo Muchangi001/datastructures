@@ -24,6 +24,7 @@ func (s *SinglyLinkedList) Init(h *Node, t *Node) {
 		log.Println("Error : failed to initialize singly linked list, pointer to tail is not nil")
 		return
 	}
+	h.Next = t
 	s.Head = h
 	s.Tail = t
 }
@@ -38,7 +39,7 @@ func (s *SinglyLinkedList) GetSize() (count uint) {
 
 func (s *SinglyLinkedList) PrintList() {
 	if s.Head == nil {
-		log.Println("Error : failed to print singly linked list, pointer to head is nil. Make sure to initialize the list first")
+		log.Println("Error : failed to print singly linked list, list is empty")
 		return
 	}
 
