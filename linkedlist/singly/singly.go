@@ -6,45 +6,45 @@ import (
 )
 
 type Node struct {
-	data string
-	next *Node
+	Data string
+	Next *Node
 }
 
 type SinglyLinkedList struct {
-	head *Node
-	tail *Node
+	Head *Node
+	Tail *Node
 }
 
 func (s *SinglyLinkedList) Init(h *Node, t *Node) {
-	if s.head != nil {
+	if s.Head != nil {
 		log.Println("Error : failed to initialize singly linked list, pointer to head is not null")
 		return
 	}
-	if s.tail != nil {
+	if s.Tail != nil {
 		log.Println("Error : failed to initialize singly linked list, pointer to tail is not nil")
 		return
 	}
-	s.head = h
-	s.tail = t
+	s.Head = h
+	s.Tail = t
 }
 
 func (s *SinglyLinkedList) GetSize() (count uint) {
 	count = uint(0)
-	for currNode := s.head; currNode != nil; currNode = currNode.next {
+	for currNode := s.Head; currNode != nil; currNode = currNode.Next {
 		count++
 	}
 	return
 }
 
 func (s *SinglyLinkedList) PrintList() {
-	if s.head == nil {
+	if s.Head == nil {
 		log.Println("Error : failed to print singly linked list, pointer to head is nil. Make sure to initialize the list first")
 		return
 	}
 
 	i := 0
-	for currNode := s.head ; currNode != nil; currNode = currNode.next {
-		fmt.Printf("Node [%v] -> %v\n", i, currNode.data)
+	for currNode := s.Head ; currNode != nil; currNode = currNode.Next {
+		fmt.Printf("Node [%v] -> %v\n", i, currNode.Data)
 		i++
 	}
 }
@@ -54,18 +54,18 @@ func (s *SinglyLinkedList) Prepend(n *Node) {
 		log.Println("Error : failed to prepend, pointer to node is nil")
 		return
 	}
-	if s.head == nil {
-		s.head = n
+	if s.Head == nil {
+		s.Head = n
 		return
 	}
-	if s.head == s.tail {
-		n.next = s.head
-		s.head = n
-		s.tail = s.head.next
+	if s.Head == s.Tail {
+		n.Next = s.Head
+		s.Head = n
+		s.Tail = s.Head.Next
 		return
 	}
-	n.next = s.head
-	s.head = n
+	n.Next = s.Head
+	s.Head = n
 }
 
 func (s *SinglyLinkedList) Insert(n *Node, i uint) {
@@ -80,35 +80,35 @@ func (s *SinglyLinkedList) Insert(n *Node, i uint) {
 		log.Println("Error : failed to insert node, index is out of range")
 		return
 	}
-	currNode := s.head
+	currNode := s.Head
 	for j := uint(0); j != i - 1; j++{
-		currNode = currNode.next
+		currNode = currNode.Next
 	}
-	n.next = currNode.next
-	currNode.next = n
+	n.Next = currNode.Next
+	currNode.Next = n
 }
 
 func (s *SinglyLinkedList) Append(n *Node) {
-	if s.head == nil {
-		s.head = n
-		s.tail = s.head
+	if s.Head == nil {
+		s.Head = n
+		s.Tail = s.Head
 		return
 	}
-	if s.head == s.tail {
-		s.tail = n
-		s.head.next = s.tail
+	if s.Head == s.Tail {
+		s.Tail = n
+		s.Head.Next = s.Tail
 		return
 	}
-	s.tail.next = n
-	s.tail = n
+	s.Tail.Next = n
+	s.Tail = n
 }
 
 func (s *SinglyLinkedList) DeleteHead() {
-	if s.head == nil {
+	if s.Head == nil {
 		log.Println("Error : failed to delete head, pointer to head is nil")
 		return
 	}
-	s.head = nil
+	s.Head = nil
 }
 
 func (s *SinglyLinkedList) DeleteNode(i uint) {
@@ -116,28 +116,28 @@ func (s *SinglyLinkedList) DeleteNode(i uint) {
 		s.DeleteHead()
 	}
 	
-	currNode := s.head
+	currNode := s.Head
 	for j := uint(0); j != i - 1; j++ {
-		currNode = currNode.next
+		currNode = currNode.Next
 	}
-	currNode.next = currNode.next.next
+	currNode.Next = currNode.Next.Next
 }
 
 func (s *SinglyLinkedList) DeleteTail() {
-	if s.tail == nil {
+	if s.Tail == nil {
 		log.Println("Error : failed to delete tail, pointer to tail is nil")
 		return
 	}
-	currNode := s.head;
-	for ; currNode.next != s.tail; currNode = currNode.next {
+	currNode := s.Head;
+	for ; currNode.Next != s.Tail; currNode = currNode.Next {
 	}
-	currNode.next = nil
-	s.tail = currNode
+	currNode.Next = nil
+	s.Tail = currNode
 }
 
 func (s *SinglyLinkedList) GetNodePosition(n *Node) (i uint) {
 	i = uint(0)
-	for currNode := s.head; currNode != n; currNode = currNode.next {
+	for currNode := s.Head; currNode != n; currNode = currNode.Next {
 		i++
 	}
 	return 
