@@ -109,7 +109,9 @@ func (s *SinglyLinkedList) DeleteHead() {
 		log.Println("Error : failed to delete head, pointer to head is nil")
 		return
 	}
+	tempNode := s.Head.Next
 	s.Head = nil
+	s.Head = tempNode
 }
 
 func (s *SinglyLinkedList) DeleteNode(i uint) {
