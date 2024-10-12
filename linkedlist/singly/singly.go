@@ -117,6 +117,7 @@ func (s *SinglyLinkedList) DeleteHead() {
 func (s *SinglyLinkedList) DeleteNode(i uint) {
 	if i == 0 {
 		s.DeleteHead()
+		return
 	}
 	
 	currNode := s.Head
